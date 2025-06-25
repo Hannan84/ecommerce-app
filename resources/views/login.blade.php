@@ -2,29 +2,20 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
+<div class="container">
     <h2>Login</h2>
-
     @if($errors->any())
-        <div style="color:red;">
-            @foreach ($errors->all() as $error)
-                <p>{{ $error }}</p>
-            @endforeach
-        </div>
+        <div class="error">{{ $errors->first() }}</div>
     @endif
-
-    <form method="POST" action="{{ url('/login') }}">
+    <form method="POST" action="/login">
         @csrf
-        <div>
-            <label>Email:</label>
-            <input type="email" name="email" required>
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" name="password" required>
-        </div>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
         <button type="submit">Login</button>
     </form>
+</div>
 </body>
 </html>

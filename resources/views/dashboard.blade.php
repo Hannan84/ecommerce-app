@@ -2,11 +2,14 @@
 <html>
 <head>
     <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 </head>
 <body>
-    <h2>Welcome, {{ Auth::user()->name }}</h2>
-    <p>Email: {{ Auth::user()->email }}</p>
-
-    <a href="{{ url('/logout') }}">Logout</a>
+<div class="container">
+    <h1>Welcome, {{ Auth::user()->name }}</h1>
+    <p>You are logged in to the dashboard.</p>
+    <a href="/logout">Logout</a>
+</div>
 </body>
 </html>

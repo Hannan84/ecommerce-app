@@ -22,7 +22,7 @@ class LoginController extends Controller
   }
   $user = auth('api')->user();
   auth('web')->login($user);
-  $url = 'http://127.0.0.1:8000/auth/external-login?token=' . $token;
+  $url = 'http://127.0.0.1:8001/auth/external-login?token=' . $token;
   return redirect($url);
  }
 
@@ -30,6 +30,6 @@ class LoginController extends Controller
  {
   auth('web')->logout();
   auth('api')->logout();
-  return redirect('http://127.0.0.1:8000/logout?redirect=http://ecommerce.test/login');
+  return redirect('http://127.0.0.1:8001/logout?redirect=http://127.0.0.1:8000/');
  }
 }
