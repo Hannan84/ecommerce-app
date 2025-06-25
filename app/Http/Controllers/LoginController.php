@@ -11,14 +11,19 @@ class LoginController extends Controller
  }
  public function login(Request $request)
  {
+  $request->validate([
+   'email'    => 'required|email',
+   'password' => 'required|min:6',
+  ]);
   $credentials = $request->only('email', 'password');
 
   if (! $token = auth()->attempt($credentials)) {
    return back()->withErrors(['Invalid credentials']);
   }
 
-  $url = 'http://127.0.0.1:8000/auth/external-login?token=' . $token;
-  return redirect($url);
+//   $url = 'http://127.0.0.1:8000/auth/external-login?token=' . $token;
+//   return redirect($url);
+  return redirect()->to('/dashboard');
  }
 
  public function logout()
