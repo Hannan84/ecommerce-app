@@ -17,18 +17,19 @@ class LoginController extends Controller
   ]);
   $credentials = $request->only('email', 'password');
 
-  if (! $token = auth()->attempt($credentials)) {
+  if (! $token = auth('api')->attempt($credentials)) {
    return back()->withErrors(['Invalid credentials']);
   }
-
-//   $url = 'http://127.0.0.1:8000/auth/external-login?token=' . $token;
-//   return redirect($url);
-  return redirect()->to('/dashboard');
+  $user = auth('api')->user();
+  auth('web')->login($user);
+  $url = 'http://127.0.0.1:8000/auth/external-login?token=' . $token;
+  return redirect($url);
  }
 
  public function logout()
  {
-  auth()->logout();
+  auth('web')->logout();
+  auth('api')->logout();
   return redirect('http://127.0.0.1:8000/logout?redirect=http://ecommerce.test/login');
  }
 }
